@@ -48,4 +48,4 @@ What you should learn from this project:
 ---
 
 ## Author
-* **Felipe Satizabal** - [felipesv](https://github.com/felipesv)
+* **Brian Kipkemboi** - [Brian Kipkemboi](https://github.com/Briankipkemboi78)
