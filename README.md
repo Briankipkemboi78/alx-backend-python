@@ -1,8 +1,8 @@
 # alx-backend-python
-General
+## General
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 
-Type annotations in Python 3
+## Type annotations in Python 3
 How you can use type annotations to specify function signatures and variable types
 Duck typing
 How to validate your code with mypy
@@ -21,7 +21,7 @@ All your classes should have a documentation (python3 -c 'print(__import__("my_m
 All your functions (inside and outside a class) should have a documentation (python3 -c 'print(__import__("my_module").my_function.__doc__)' and python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)')
 A documentation is not a simple word, it’s a real sentence explaining what’s the purpose of the module, class or method (the length of it will be verified)
 Tasks
-0. Basic annotations - add
+### 0. Basic annotations - add
 mandatory
 Write a type-annotated function add that takes a float a and a float b as arguments and returns their sum as a float.
 
@@ -37,11 +37,8 @@ True
 {'a':  <class 'float'>, 'b': <class 'float'>, 'return': <class 'float'>}
 Repo:
 
-GitHub repository: alx-backend-python
-Directory: 0x00-python_variable_annotations
-File: 0-add.py
    
-1. Basic annotations - concat
+# 1. Basic annotations - concat
 mandatory
 Write a type-annotated function concat that takes a string str1 and a string str2 as arguments and returns a concatenated string
 
@@ -60,11 +57,8 @@ True
 {'str1': <class 'str'>, 'str2': <class 'str'>, 'return': <class 'str'>}
 Repo:
 
-GitHub repository: alx-backend-python
-Directory: 0x00-python_variable_annotations
-File: 1-concat.py
    
-2. Basic annotations - floor
+# 2. Basic annotations - floor
 mandatory
 Write a type-annotated function floor which takes a float n as argument and returns the floor of the float.
 
@@ -87,11 +81,8 @@ True
 floor(3.14) returns 3, which is a <class 'int'>
 Repo:
 
-GitHub repository: alx-backend-python
-Directory: 0x00-python_variable_annotations
-File: 2-floor.py
    
-3. Basic annotations - to string
+# 3. Basic annotations - to string
 mandatory
 Write a type-annotated function to_str that takes a float n as argument and returns the string representation of the float.
 
@@ -110,11 +101,8 @@ True
 to_str(3.14) returns 3.14, which is a <class 'str'>
 Repo:
 
-GitHub repository: alx-backend-python
-Directory: 0x00-python_variable_annotations
-File: 3-to_str.py
    
-4. Define variables
+# 4. Define variables
 mandatory
 Define and annotate the following variables with the specified values:
 
@@ -140,13 +128,8 @@ a is a <class 'int'> with a value of 1
 pi is a <class 'float'> with a value of 3.14
 i_understand_annotations is a <class 'bool'> with a value of True
 school is a <class 'str'> with a value of Holberton
-Repo:
-
-GitHub repository: alx-backend-python
-Directory: 0x00-python_variable_annotations
-File: 4-define_variables.py
    
-5. Complex types - list of floats
+# 5. Complex types - list of floats
 mandatory
 Write a type-annotated function sum_list which takes a list input_list of floats as argument and returns their sum as a float.
 
@@ -165,13 +148,8 @@ bob@dylan:~$ ./5-main.py
 True
 {'input_list': typing.List[float], 'return': <class 'float'>}
 sum_list(floats) returns 6.470000000000001 which is a <class 'float'>
-Repo:
-
-GitHub repository: alx-backend-python
-Directory: 0x00-python_variable_annotations
-File: 5-sum_list.py
    
-6. Complex types - mixed list
+# 6. Complex types - mixed list
 mandatory
 Write a type-annotated function sum_mixed_list which takes a list mxd_lst of integers and floats and returns their sum as a float.
 
@@ -190,13 +168,8 @@ bob@dylan:~$ ./6-main.py
 {'mxd_lst': typing.List[typing.Union[int, float]], 'return': <class 'float'>}
 True
 sum_mixed_list(mixed) returns 679.13 which is a <class 'float'>
-Repo:
-
-GitHub repository: alx-backend-python
-Directory: 0x00-python_variable_annotations
-File: 6-sum_mixed_list.py
    
-7. Complex types - string and int/float to tuple
+# 7. Complex types - string and int/float to tuple
 mandatory
 Write a type-annotated function to_kv that takes a string k and an int OR float v as arguments and returns a tuple. The first element of the tuple is the string k. The second element is the square of the int/float v and should be annotated as a float.
 
@@ -213,13 +186,8 @@ bob@dylan:~$ ./7-main.py
 {'k': <class 'str'>, 'v': typing.Union[int, float], 'return': typing.Tuple[str, float]}
 ('eggs', 9)
 ('school', 0.0004)
-Repo:
-
-GitHub repository: alx-backend-python
-Directory: 0x00-python_variable_annotations
-File: 7-to_kv.py
    
-8. Complex types - functions
+# 8. Complex types - functions
 mandatory
 Write a type-annotated function make_multiplier that takes a float multiplier as argument and returns a function that multiplies a float by multiplier.
 
@@ -234,13 +202,8 @@ print("{}".format(fun(2.22)))
 bob@dylan:~$ ./8-main.py
 {'multiplier': <class 'float'>, 'return': typing.Callable[[float], float]}
 4.928400000000001
-Repo:
-
-GitHub repository: alx-backend-python
-Directory: 0x00-python_variable_annotations
-File: 8-make_multiplier.py
    
-9. Let's duck type an iterable object
+# 9. Let's duck type an iterable object
 mandatory
 Annotate the below function’s parameters and return values with the appropriate types
 
@@ -255,8 +218,4 @@ print(element_length.__annotations__)
 
 bob@dylan:~$ ./9-main.py 
 {'lst': typing.Iterable[typing.Sequence], 'return': typing.List[typing.Tuple[typing.Sequence, int]]}
-Repo:
 
-GitHub repository: alx-backend-python
-Directory: 0x00-python_variable_annotations
-File: 9-element_length.py
