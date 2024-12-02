@@ -1,4 +1,5 @@
 import mysql.connector
+import seed  # Importing the seed file for the database setup
 
 def stream_data(connection):
     cursor = connection.cursor()
@@ -8,9 +9,6 @@ def stream_data(connection):
     cursor.close()
 
 if __name__ == "__main__":
-    # Assuming seed.py is imported and the database is already set up
-    seed = __import__('seed')
-
     connection = seed.connect_to_prodev()
 
     if connection:
@@ -19,4 +17,3 @@ if __name__ == "__main__":
             print(row)
 
         connection.close()
-
