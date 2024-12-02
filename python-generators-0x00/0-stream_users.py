@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import mysql.connector
 import seed  # Importing the seed file for the database setup
 
