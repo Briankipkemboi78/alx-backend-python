@@ -28,17 +28,16 @@ def main():
     data_file = 'user_data.csv'  # Ensure this file exists in the same directory
     seed.insert_data(connection, data_file)
 
-    # Step 6: Perform some checks
     cursor = connection.cursor()
 
-    # Verify database creation
+    # Verification of database creation
     cursor.execute(
         "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'ALX_prodev';"
     )
     if cursor.fetchone():
         print("Database ALX_prodev is present.")
 
-    # Fetch and display a few rows from the user_data table
+    # Fetching only few records.
     cursor.execute("SELECT * FROM user_data LIMIT 5;")
     rows = cursor.fetchall()
     print("Sample data from user_data table:")
