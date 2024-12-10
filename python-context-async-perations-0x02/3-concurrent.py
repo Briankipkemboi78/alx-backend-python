@@ -1,30 +1,24 @@
+import aiosqlite
 import asyncio
-import aiomysql
 
 # Asynchronous function to fetch all users
-async def async_fetch_users(host, user, password, database):
+async def async_fetch_users(db_name):
     """
-    Fetch all users from the MySQL database asynchronously.
+    Fetch all users from the database asynchronously.
     """
-    async with aiomysql.connect(
-        host=host, user=user, password=password, db=database
-    ) as conn:
-        async with conn.cursor() as cur:
-            await cur.execute("SELECT * FROM users")
-            users = await cur.fetchall()
+    async with aiosqlite.connect(db_name) as db:
+        async with db.execute("SELECT * FROM users") as cursor:
+            users = await cursor.fetchall()
             return users
 
 # Asynchronous function to fetch users older than 40
-async def async_fetch_older_users(host, user, password, database):
+async def async_fetch_older_users(db_name):
     """
-    Fetch users older than 40 from the MySQL database asynchronously.
+    Fetch users older than 40 from the database asynchronously.
     """
-    async with aiomysql.connect(
-        host=host, user=user, password=password, db=database
-    ) as conn:
-        async with conn.cursor() as cur:
-            await cur.execute("SELECT * FROM users WHERE age > 40")
-            older_users = await cur.fetchall()
+    async with aiosqlite.connect(db_name) as db:
+        async with db.execute("SELECT * FROM users WHERE age > 40") as cursor:
+            older_users = await cursor.fetchall()
             return older_users
 
 # Function to execute both queries concurrently
@@ -32,21 +26,13 @@ async def fetch_concurrently():
     """
     Execute both queries concurrently using asyncio.gather.
     """
-    # MySQL connection details
-    host = "localhost"
-    user = "root"
-    password = "*******"
-    database = "alx_pro_dev"
-
-    # Create tasks for concurrent execution
+    db_name = "example.db"  # SQLite database name
     tasks = [
-        async_fetch_users(host, user, password, database),
-        async_fetch_older_users(host, user, password, database)
+        async_fetch_users(db_name),
+        async_fetch_older_users(db_name)
     ]
-
     results = await asyncio.gather(*tasks)  # Run tasks concurrently
     all_users, older_users = results
-
     print("All Users:", all_users)
     print("Users Older than 40:", older_users)
 
