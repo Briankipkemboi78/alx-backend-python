@@ -45,7 +45,7 @@ class DatabaseConnection:
         if self.connection:
             self.connection.commit()
             self.connection.close()
-
+            
     
 if __name__ == "__main__":
     # MySQL database connection parameters
