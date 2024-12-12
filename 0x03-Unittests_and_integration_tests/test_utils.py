@@ -8,7 +8,7 @@ function with various cases.
 """
 
 import unittest
-from parameterized import expand
+from parameterized import parameterized
 from utils import access_nested_map
 from typing import Any, Dict, Tuple
 
@@ -21,7 +21,7 @@ class TestAccessNestedMap(unittest.TestCase):
     function works correctly for various nested dictionary structures.
     """
 
-    @expand([
+    @parameterized.expand([
         ("Test case 1", {"a": 1}, ("a",), 1),
         ("Test case 2", {"a": {"b": 2}}, ("a",), {"b": 2}),
         ("Test case 3", {"a": {"b": 2}}, ("a", "b"), 2),
