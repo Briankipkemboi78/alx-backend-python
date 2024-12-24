@@ -20,3 +20,4 @@ main_api_urlpatterns = [
 auth_api_urlpatterns = [
     path('', include(auth_router.urls)), 
 ]
+

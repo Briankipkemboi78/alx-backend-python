@@ -1,8 +1,7 @@
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import TokenObtainPairView
 
-# Create views for obtaining JWT token and refreshing it
-class MyTokenObtainPairView(TokenObtainPairView):
-    pass
-
-class MyTokenRefreshView(TokenRefreshView):
+class CustomTokenObtainPairView(TokenObtainPairView):
+    """
+    Custom view for obtaining JWT tokens.
+    """
     pass
