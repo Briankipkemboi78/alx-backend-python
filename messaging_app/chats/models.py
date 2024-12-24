@@ -29,10 +29,12 @@ class Conversation(models.Model):
 
 class Message(models.Model):
     """Model to store messages in a conversation."""
+    """Model to store messages in a conversation."""
+    message_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  # Unique identifier for each message
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="messages_sent")
     conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name="messages")
-    content = models.TextField()
-    timestamp = models.DateTimeField(auto_now_add=True)
+    message_body = models.TextField()  # Content of the message
+    sent_at = models.DateTimeField(auto_now_add=True)  # Timestamp for when the message was sent
 
     def __str__(self):
         return f"Message {self.id} from {self.sender.username}"
