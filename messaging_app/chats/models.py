@@ -19,6 +19,7 @@ class User(AbstractUser):
 
 class Conversation(models.Model):
     """Model to track conversations between users."""
+    conversation_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  # Add UUID for unique conversation IDs
     participants = models.ManyToManyField(User, related_name="conversations")
     created_at = models.DateTimeField(auto_now_add=True)
 
