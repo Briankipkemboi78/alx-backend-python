@@ -1,8 +1,15 @@
+import uuid  # Required for unique identifier for the user
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
 class User(AbstractUser):
-    """ Custom user model extending the built-in AbstractUser"""
+    """Custom user model extending the built-in AbstractUser"""
+    user_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True, primary_key=True)
+    email = models.EmailField(unique=True)  # Ensure unique email for each user
+    password = models.CharField(max_length=128)  # Standard password field
+    first_name = models.CharField(max_length=30, blank=True, null=True)
+    last_name = models.CharField(max_length=30, blank=True, null=True)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 
