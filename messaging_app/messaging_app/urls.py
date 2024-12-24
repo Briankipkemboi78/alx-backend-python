@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from chats.urls import main_api_urlpatterns, auth_api_urlpatterns
 from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework_simplejwt import views as jwt_views
 from chats.auth import CustomTokenObtainPairView
 
 urlpatterns = [
@@ -26,4 +27,8 @@ urlpatterns = [
     path('api-auth/login/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api-auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include(main_api_urlpatterns)),
+
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 ]
+
