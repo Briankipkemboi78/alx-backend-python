@@ -1,3 +1,5 @@
+from rest_framework import filters
+
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -11,7 +13,10 @@ class ConversationViewSet(viewsets.ModelViewSet):
     """
     queryset = Conversation.objects.all()
     serializer_class = ConversationSerializer
-    permission_classes = [IsAuthenticated]  # Ensure the user is authenticated
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
+    filterset_fields = ['participants']  # You can filter by participants
+    ordering_fields = ['created_at']  # You can order conversations by creation date
+    ordering = ['-created_at']  # Default ordering: most recent conversations first
 
     def perform_create(self, serializer):
         """
@@ -44,7 +49,10 @@ class MessageViewSet(viewsets.ModelViewSet):
     """
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
-    permission_classes = [IsAuthenticated]  # Ensure the user is authenticated
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
+    filterset_fields = ['conversation', 'sender']  # You can filter messages by conversation and sender
+    ordering_fields = ['timestamp']  # You can order messages by timestamp
+    ordering = ['timestamp']  # Default ordering: oldest to newest
 
     def perform_create(self, serializer):
         """
