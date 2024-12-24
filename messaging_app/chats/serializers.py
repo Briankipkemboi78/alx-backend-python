@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import User, Conversation, Message
 
+from django.contrib.auth import get_user_model
+
 
 class UserSerializer(serializers.ModelSerializer):
     """Serializer for the User model."""
@@ -48,3 +50,8 @@ class ConversationSerializer(serializers.ModelSerializer):
         if len(data['participants']) < 2:
             raise serializers.ValidationError("A conversation must have at least two participants.")
         return data
+    
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ['username', 'password', 'email']
