@@ -62,3 +62,19 @@ class OffensiveLanguageMiddleware:
 
         return response
         
+
+class RolePermissionMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    
+    def __call__(self, request):
+        if request.user.is_authenticated:
+            user_role = request.user.role
+            if user_role not in ['admin', 'moderator']:
+                return HttpResponseForbidden("You do not have permission to access this page.")
+            else:
+                return HttpResponseForbidden("You need to be logged in to access this page.")
+            
+        response = self.get_response(request)
+        return response
