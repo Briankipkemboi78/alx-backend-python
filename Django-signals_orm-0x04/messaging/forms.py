@@ -1,5 +1,6 @@
 from django import forms
+from django.contrib.auth.models import User
 
 class MessageForm(forms.Form):
-    receiver_id = forms.IntegerField()  # ID of the receiver
-    content = forms.CharField(widget=forms.Textarea, max_length=2000)
+    receiver_id = forms.IntegerField()
+    content = forms.CharField(widget=forms.Textarea)
