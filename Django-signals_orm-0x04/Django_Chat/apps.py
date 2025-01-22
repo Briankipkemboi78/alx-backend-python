@@ -5,4 +5,4 @@ class DjangoChatConfig(AppConfig):
     name = 'Django-Chat'
 
     def ready(self):
-        import Django-Chat.signals  # Import signals here
+        import Django_Chat.signals  # Import signals here
