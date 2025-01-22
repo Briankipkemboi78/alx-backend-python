@@ -8,14 +8,6 @@ from .models import Message
 from .forms import MessageForm
 
 @login_required
-def delete_user(request):
-    if request.method == "POST":
-        user = request.user
-        user.delete()
-        messages.success(request, "Your account and related data have been deleted.")
-        return redirect("home")
-    
-@@login_required
 def send_message(request):
     if request.method == "POST":
         form = MessageForm(request.POST)
@@ -27,8 +19,8 @@ def send_message(request):
             
             # Create the message
             Message.objects.create(
-                sender=sender,        # This ensures the sender is the logged-in user
-                receiver=receiver,    # This ensures the receiver is fetched from the form
+                sender=sender,
+                receiver=receiver,
                 content=form.cleaned_data['content']
             )
             return JsonResponse({"status": "Message sent successfully"})
@@ -36,3 +28,21 @@ def send_message(request):
             return JsonResponse({"status": "Form validation failed", "errors": form.errors})
 
     return JsonResponse({"status": "Invalid request method"})
+
+@login_required
+def view_messages(request):
+    # Retrieve messages for the logged-in user (filter messages by the receiver)
+    messages = Message.objects.filter(receiver=request.user).select_related('sender')
+    
+    # Return the messages as JSON (or render them in a template)
+    messages_data = [
+        {
+            "sender": message.sender.username,
+            "content": message.content,
+            "timestamp": message.timestamp
+        }
+        for message in messages
+    ]
+    
+    return JsonResponse({"messages": messages_data})
+
