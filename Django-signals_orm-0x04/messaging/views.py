@@ -13,13 +13,13 @@ def send_message(request):
         form = MessageForm(request.POST)
         if form.is_valid():
             # Extract sender and receiver
-            sender = request.user
+            sender = request.user  # Ensure the sender is the currently logged-in user
             receiver_id = form.cleaned_data['receiver_id']
             receiver = get_object_or_404(User, id=receiver_id)
             
             # Create the message
             Message.objects.create(
-                sender=sender,
+                sender=sender,  # sender is set to the currently logged-in user
                 receiver=receiver,
                 content=form.cleaned_data['content']
             )
@@ -37,7 +37,7 @@ def view_messages(request):
     # Return the messages as JSON (or render them in a template)
     messages_data = [
         {
-            "sender": message.sender.username,
+            "sender": message.sender.username,  # Display the sender's username
             "content": message.content,
             "timestamp": message.timestamp
         }
@@ -45,4 +45,3 @@ def view_messages(request):
     ]
     
     return JsonResponse({"messages": messages_data})
-
