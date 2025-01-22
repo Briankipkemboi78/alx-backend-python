@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.views.decorators.cache import cache_page
 from .models import Message
 from .forms import MessageForm
 
@@ -30,6 +31,7 @@ def send_message(request):
     return JsonResponse({"status": "Invalid request method"})
 
 @login_required
+@cache_page(60)
 def view_messages(request):
     # Retrieve messages for the logged-in user (filter messages by the receiver)
     messages = Message.objects.filter(receiver=request.user).select_related('sender')
@@ -48,6 +50,7 @@ def view_messages(request):
 
 
 @login_required
+@cache_page(60)
 def view_unread_messages(request):
     # Use the custom manager to get unread messages for the logged-in user
     unread_messages = Message.unread.unread_for_user(request.user).only('sender', 'content', 'timestamp')
