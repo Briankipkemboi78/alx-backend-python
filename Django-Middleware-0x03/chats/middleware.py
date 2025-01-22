@@ -3,6 +3,7 @@ from datetime import datetime
 import time
 from collections import defaultdict
 from django.http import HttpResponseForbidden
+from django.http import JsonResponse
 
 class RequestLoggingMiddleware:
     def __init__(self, get_response):
@@ -67,14 +68,13 @@ class RolepermissionMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
 
-    
     def __call__(self, request):
-        if request.user.is_authenticated:
-            user_role = request.user.role
-            if user_role not in ['admin', 'moderator']:
-                return HttpResponseForbidden("You do not have permission to access this page.")
-            else:
-                return HttpResponseForbidden("You need to be logged in to access this page.")
-            
+        user_role = getattr(request.user, 'role', None)
+
+        allowed_roles = ['admin', 'moderator']
+
+        if user_role not in allowed_roles:
+            return JsonResponse({'error': 'Forbidden. Insufficient permissions.'}, status=403)
+
         response = self.get_response(request)
         return response
