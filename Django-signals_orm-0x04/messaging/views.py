@@ -45,3 +45,22 @@ def view_messages(request):
     ]
     
     return JsonResponse({"messages": messages_data})
+
+
+
+@login_required
+def view_unread_messages(request):
+    # Retrieve unread messages for the logged-in user using the custom manager
+    unread_messages = Message.unread_messages.for_user(request.user)
+    
+    # Serialize the data and return as JSON response
+    messages_data = [
+        {
+            "sender": message.sender.username,
+            "content": message.content,
+            "timestamp": message.timestamp
+        }
+        for message in unread_messages
+    ]
+    
+    return JsonResponse({"unread_messages": messages_data})
