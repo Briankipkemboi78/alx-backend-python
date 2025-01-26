@@ -9,7 +9,9 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out source code...'
-                git credentialsId: "${GITHUB_CREDENTIALS}", url: 'https://github.com/Briankipkemboi78/alx-backend-python'
+                // Explicitly checking out the branch and logging it
+                sh 'git branch'
+                git branch: 'main', credentialsId: "${GITHUB_CREDENTIALS}", url: 'https://github.com/Briankipkemboi78/alx-backend-python'
             }
         }
 
@@ -17,7 +19,7 @@ pipeline {
             steps {
                 echo 'Installing dependencies...'
                 sh 'python3 -m venv venv'
-                sh './venv/bin/pip install -r messaging_app/requirements.txt'
+                sh './venv/bin/pip3 install -r messaging_app/requirements.txt'
             }
         }
 
