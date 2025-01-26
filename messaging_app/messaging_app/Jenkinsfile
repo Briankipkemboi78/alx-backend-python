@@ -7,7 +7,6 @@ pipeline {
         DOCKER_IMAGE = 'briankipkemboi78/messaging_app' 
         DOCKER_TAG = 'latest'
     }
-
     stages {
         stage('Checkout') {
             steps {
