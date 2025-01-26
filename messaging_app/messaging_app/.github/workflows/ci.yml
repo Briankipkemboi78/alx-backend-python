@@ -35,6 +35,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r messaging_app/requirements.txt
+          pip install flake8 coverage
 
       - name: Set up MySQL Database
         run: |
@@ -45,6 +46,21 @@ jobs:
         run: |
           python messaging_app/manage.py migrate
 
-      - name: Run tests
+      - name: Run tests with coverage
         run: |
-          python messaging_app/manage.py test
+          coverage run --source=messaging_app manage.py test
+          coverage report
+          coverage html
+
+      - name: Run flake8 linting
+        run: |
+          flake8 messaging_app --max-line-length=79 --exit-zero  # Customize flake8 options as needed
+
+      - name: Upload code coverage report as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-report
+          path: htmlcov/
+
+    # Fail the workflow if flake8 detects linting errors
+    fail-fast: true
